@@ -3,10 +3,10 @@ MAINTAINER shiva@testymaily.co.test
 RUN yum install -y httpd \
     zip \
     unzip
-ADD https://www.free-css.com/assets/files/free-css-templates/download/page263/dpot.zip /var/www/html
+ADD https://www.free-css.com/assets/files/free-css-templates/download/page263/mind.zip /var/www/html
 WORKDIR /var/www/html
-RUN unzip dpot.zip
-RUN cp -rvf dpot/* .
-RUN rm -rf dpot.zip dpot
+RUN unzip mind.zip
+RUN cp -rvf mind/* .
+RUN rm -rf mind.zip mind /var/www/html/*
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 EXPOSE 80
