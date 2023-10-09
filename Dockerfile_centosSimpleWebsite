@@ -1,0 +1,15 @@
+FROM centos:latest
+MAINTAINER shiva@testymaily.co.test
+RUN echo "below yum repo URL via sed is being updated because the yum update failed during build"
+RUN sed -i -e "s|mirrorlist=|#mirrorlist=|g" /etc/yum.repos.d/CentOS-* & sed -i -e "s|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g" /etc/yum.repos.d/CentOS-*
+RUN echo "yum update is important of runzip installation failes to be downloaded" & yum update -y
+RUN yum install -y httpd \
+    zip \
+    unzip
+ADD https://www.free-css.com/assets/files/free-css-templates/download/page263/mind.zip /var/www/html/
+WORKDIR /var/www/html/
+RUN unzip mind.zip
+RUN cp -rvf mind/* .
+RUN rm -rf mind.zip mind 
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+EXPOSE 80
